@@ -1,16 +1,37 @@
 # Personal Finance Manager (C)
 
-A menu-driven finance management system built in C.
+A simple menu-driven console application built using C programming to manage personal income, expenses, and balance.
 
-## Features
+---
+
+## Features (Completed)
+
 - Add Income
 - Add Expense
 - View Balance
-- Transaction History
-- File Storage
+- Interactive Menu System
 
-## Technologies
+---
+
+## Tech Stack
+
 - C Programming
-- File Handling
-- Structures
-- Functions
+- Loops (while)
+- Switch-case
+- Basic Input/Output
+
+---
+
+## Future Improvements
+
+- Transaction history using arrays
+- File handling for saving data permanently
+- Structures for better data management
+
+---
+
+## How to Run
+
+```bash id="runfix"
+gcc finance_manager.c -o finance_manager
+./finance_manager
