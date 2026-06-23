@@ -54,6 +54,8 @@ gcc finance_manager.c -o finance_manager
 * Day 4: Transaction History using Arrays
 * Day 5: File Handling (Save & Load Transactions)
 * Day 6: Clear Transaction History
+* Day 7: Expense Categories
+
 
 ---
 
