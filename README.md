@@ -30,12 +30,12 @@ A simple menu-driven console application built using C programming to manage per
 
 ## Future Improvements
 
-* Structures for better data management
-* Transaction Categories (Food, Travel, Shopping, etc.)
-* Monthly Expense Reports
-* Search Transactions
 
----
+- Structures for better data management
+- Monthly Expense Reports
+- Search Transactions
+- Data Visualization of Expenses
+- User Authentication
 
 ## How to Run
 
