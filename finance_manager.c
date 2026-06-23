@@ -7,6 +7,25 @@ float expense[100];
 int incomeCount = 0;
 int expenseCount = 0;
 int choice;
+FILE *fp = fopen("transactions.txt", "r");
+
+    if(fp != NULL)
+    {
+        char type[20];
+        float amount;
+
+        while(fscanf(fp, "%s %f", type, &amount) == 2)
+        {
+            if(type[0] == 'I')
+                income[incomeCount++] = amount;
+            else if(type[0] == 'E')
+                expense[expenseCount++] = amount;
+        }
+
+        fclose(fp);
+    }
+
+
     // ✅ Welcome message (correct place)
     printf("Welcome to Personal Finance Manager!\n");
 
@@ -17,7 +36,8 @@ int choice;
         printf("2. Add Expense\n");
         printf("3. View Balance\n");
         printf("4. View History\n");
-        printf("5. Exit\n");
+        printf("5. Clear History\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -78,6 +98,18 @@ int choice;
 
     break;
     case 5:
+{
+    FILE *fp = fopen("transactions.txt", "w");
+
+    fclose(fp);
+
+    incomeCount = 0;
+    expenseCount = 0;
+
+    printf("Transaction history cleared successfully!\n");
+    break;
+}
+    case 6:
     printf("Exiting...\n");
     return 0;
 
