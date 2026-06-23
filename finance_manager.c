@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include<string.h>
 
 int main() {
 
    float income[100];
 float expense[100];
+char category[100][20];
 int incomeCount = 0;
 int expenseCount = 0;
 int choice;
@@ -57,15 +59,60 @@ FILE *fp = fopen("transactions.txt", "r");
     fclose(fp);
     break;
 }
-
-                case 2:
+case 2:
 {
+    int catChoice;
+
     FILE *fp = fopen("transactions.txt", "a");
 
     printf("Enter expense: ");
     scanf("%f", &expense[expenseCount]);
 
-    fprintf(fp, "Expense %.2f\n", expense[expenseCount]);
+    printf("\nChoose Category:\n");
+    printf("1. Food\n");
+    printf("2. Travel\n");
+    printf("3. Shopping\n");
+    printf("4. Education\n");
+    printf("5. Medicine\n");
+    printf("6. Entertainment\n");
+    printf("7. Other\n");
+
+    printf("Enter category choice: ");
+    scanf("%d", &catChoice);
+
+    switch(catChoice)
+    {
+        case 1:
+            strcpy(category[expenseCount], "Food");
+            break;
+
+        case 2:
+            strcpy(category[expenseCount], "Travel");
+            break;
+
+        case 3:
+            strcpy(category[expenseCount], "Shopping");
+            break;
+
+        case 4:
+            strcpy(category[expenseCount], "Education");
+            break;
+
+        case 5:
+            strcpy(category[expenseCount], "Medicine");
+            break;
+
+        case 6:
+            strcpy(category[expenseCount], "Entertainment");
+            break;
+
+        default:
+            strcpy(category[expenseCount], "Other");
+    }
+
+    fprintf(fp, "Expense %.2f %s\n",
+            expense[expenseCount],
+            category[expenseCount]);
 
     expenseCount++;
 
@@ -87,14 +134,16 @@ FILE *fp = fopen("transactions.txt", "r");
     break;
 }
 
-            case 4:
+         case 4:
     printf("\n===== INCOME HISTORY =====\n");
     for (int i = 0; i < incomeCount; i++)
         printf("+ %.2f\n", income[i]);
 
     printf("\n===== EXPENSE HISTORY =====\n");
     for (int i = 0; i < expenseCount; i++)
-        printf("- %.2f\n", expense[i]);
+        printf("- %.2f (%s)\n",
+               expense[i],
+               category[i]);
 
     break;
     case 5:
