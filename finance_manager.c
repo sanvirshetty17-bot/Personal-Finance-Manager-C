@@ -24,17 +24,34 @@ int choice;
         switch(choice)
         {
             case 1:
+{
+    FILE *fp = fopen("transactions.txt", "a");
 
     printf("Enter income: ");
     scanf("%f", &income[incomeCount]);
+
+    fprintf(fp, "Income %.2f\n", income[incomeCount]);
+
     incomeCount++;
+
+    fclose(fp);
     break;
+}
 
                 case 2:
+{
+    FILE *fp = fopen("transactions.txt", "a");
+
     printf("Enter expense: ");
     scanf("%f", &expense[expenseCount]);
+
+    fprintf(fp, "Expense %.2f\n", expense[expenseCount]);
+
     expenseCount++;
+
+    fclose(fp);
     break;
+}
             
 
             case 3: {

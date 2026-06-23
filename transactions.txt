@@ -1,0 +1,2 @@
+Income 5000.00
+Expense 1000.00
