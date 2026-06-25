@@ -58,7 +58,8 @@ FILE *fp = fopen("transactions.txt", "r");
         printf("5. Clear History\n");
         printf("6. Search By Category\n");
         printf("7. Search By Amount\n");
-        printf("8. Exit\n");   
+        printf("8. Monthly Expense Report\n");
+        printf("9. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -240,6 +241,47 @@ case 7:
     break;
 }
 case 8:
+{
+    float food = 0, travel = 0, shopping = 0;
+    float education = 0, medicine = 0;
+    float entertainment = 0, other = 0;
+
+    for(int i = 0; i < expenseCount; i++)
+    {
+        if(strcmp(category[i], "Food") == 0)
+            food += expense[i];
+
+        else if(strcmp(category[i], "Travel") == 0)
+            travel += expense[i];
+
+        else if(strcmp(category[i], "Shopping") == 0)
+            shopping += expense[i];
+
+        else if(strcmp(category[i], "Education") == 0)
+            education += expense[i];
+
+        else if(strcmp(category[i], "Medicine") == 0)
+            medicine += expense[i];
+
+        else if(strcmp(category[i], "Entertainment") == 0)
+            entertainment += expense[i];
+
+        else
+            other += expense[i];
+    }
+
+    printf("\n===== EXPENSE REPORT =====\n");
+    printf("Food          : %.2f\n", food);
+    printf("Travel        : %.2f\n", travel);
+    printf("Shopping      : %.2f\n", shopping);
+    printf("Education     : %.2f\n", education);
+    printf("Medicine      : %.2f\n", medicine);
+    printf("Entertainment : %.2f\n", entertainment);
+    printf("Other         : %.2f\n", other);
+
+    break;
+}
+case 9:
     printf("Exiting...\n");
     return 0;
 
