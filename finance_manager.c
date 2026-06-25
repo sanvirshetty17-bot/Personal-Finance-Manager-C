@@ -14,23 +14,35 @@ char category[100][20];
 int incomeCount = 0;
 int expenseCount = 0;
 int choice;
+
 FILE *fp = fopen("transactions.txt", "r");
 
     if(fp != NULL)
+{
+    char type[20];
+    char cat[20];
+    float amount;
+
+    while(fscanf(fp, "%s %f", type, &amount) == 2)
     {
-        char type[20];
-        float amount;
-
-        while(fscanf(fp, "%s %f", type, &amount) == 2)
+        if(type[0] == 'I')
         {
-            if(type[0] == 'I')
-                income[incomeCount++] = amount;
-            else if(type[0] == 'E')
-                expense[expenseCount++] = amount;
+            income[incomeCount++] = amount;
         }
+        else if(type[0] == 'E')
+        {
+            fscanf(fp, "%s", cat);
 
-        fclose(fp);
+            expense[expenseCount] = amount;
+
+            strcpy(category[expenseCount], cat);
+
+            expenseCount++;
+        }
     }
+
+    fclose(fp);
+}
 
 
     // ✅ Welcome message (correct place)
