@@ -39,7 +39,8 @@ FILE *fp = fopen("transactions.txt", "r");
         printf("3. View Balance\n");
         printf("4. View History\n");
         printf("5. Clear History\n");
-        printf("6. Exit\n");
+        printf("6. Search By Category\n");
+        printf("7. Exit\n");   
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -159,6 +160,33 @@ case 2:
     break;
 }
     case 6:
+{
+    char search[20];
+    int found = 0;
+
+    printf("Enter category: ");
+    scanf("%s", search);
+
+    printf("\nMatching Transactions:\n");
+
+    for(int i = 0; i < expenseCount; i++)
+    {
+        if(strcmp(category[i], search) == 0)
+        {
+            printf("- %.2f (%s)\n",
+                   expense[i],
+                   category[i]);
+            found = 1;
+        }
+    }
+
+    if(found == 0)
+        printf("No transactions found!\n");
+
+    break;
+
+}
+case 7:
     printf("Exiting...\n");
     return 0;
 
