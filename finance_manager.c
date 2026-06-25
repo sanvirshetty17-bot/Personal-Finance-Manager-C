@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include<string.h>
-
+struct Transaction
+{
+    float amount;
+    char type[10];
+    char category[20];
+};
 int main() {
 
    float income[100];
