@@ -40,7 +40,8 @@ FILE *fp = fopen("transactions.txt", "r");
         printf("4. View History\n");
         printf("5. Clear History\n");
         printf("6. Search By Category\n");
-        printf("7. Exit\n");   
+        printf("7. Search By Amount\n");
+        printf("8. Exit\n");   
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -187,6 +188,41 @@ case 2:
 
 }
 case 7:
+{
+    float searchAmount;
+    int found = 0;
+
+    printf("Enter amount to search: ");
+    scanf("%f", &searchAmount);
+
+    printf("\nMatching Transactions:\n");
+
+    for(int i = 0; i < incomeCount; i++)
+    {
+        if(income[i] == searchAmount)
+        {
+            printf("+ %.2f\n", income[i]);
+            found = 1;
+        }
+    }
+
+    for(int i = 0; i < expenseCount; i++)
+    {
+        if(expense[i] == searchAmount)
+        {
+            printf("- %.2f (%s)\n",
+                   expense[i],
+                   category[i]);
+            found = 1;
+        }
+    }
+
+    if(found == 0)
+        printf("No transactions found!\n");
+
+    break;
+}
+case 8:
     printf("Exiting...\n");
     return 0;
 
