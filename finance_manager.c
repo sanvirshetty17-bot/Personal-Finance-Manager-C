@@ -368,8 +368,21 @@ case 10:
                category[i]);
     }
 
+    printf("\nEnter transaction number to edit: ");
+    scanf("%d", &index);
+
+    index--;
+if(index < 0 || index >= expenseCount)
+{
+    printf("Invalid transaction number!\n");
+    break;
+
     break;
 }
+printf("Enter new amount: ");
+scanf("%f", &expense[index]);
+
+printf("Amount updated successfully!\n");
 
 case 11:
     printf("Exiting...\n");
