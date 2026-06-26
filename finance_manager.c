@@ -17,24 +17,30 @@ int choice;
 
 FILE *fp = fopen("transactions.txt", "r");
 
-    if(fp != NULL)
+    FILE *fp = fopen("transactions.txt", "r");
+
+if(fp != NULL)
 {
     char type[20];
     char cat[20];
     float amount;
 
-    while(fscanf(fp, "%s %f", type, &amount) == 2)
+    while(1)
     {
-        if(type[0] == 'I')
+        if(fscanf(fp, "%s", type) != 1)
+            break;
+
+        if(strcmp(type, "Income") == 0)
         {
+            fscanf(fp, "%f", &amount);
+
             income[incomeCount++] = amount;
         }
-        else if(type[0] == 'E')
+        else if(strcmp(type, "Expense") == 0)
         {
-            fscanf(fp, "%s", cat);
+            fscanf(fp, "%f %s", &amount, cat);
 
             expense[expenseCount] = amount;
-
             strcpy(category[expenseCount], cat);
 
             expenseCount++;
@@ -59,8 +65,9 @@ FILE *fp = fopen("transactions.txt", "r");
         printf("6. Search By Category\n");
         printf("7. Search By Amount\n");
         printf("8. Monthly Expense Report\n");
-        printf("9. Exit\n");
-        printf("Enter your choice: ");
+printf("9. Delete Transaction\n");
+printf("10. Edit Transaction\n");
+printf("11. Exit\n");
         scanf("%d", &choice);
 
         switch(choice)
@@ -282,6 +289,89 @@ case 8:
     break;
 }
 case 9:
+{
+    int index;
+
+    if(expenseCount == 0)
+    {
+        printf("No expense transactions found!\n");
+        break;
+    }
+
+    printf("\n===== EXPENSE HISTORY =====\n");
+
+    for(int i = 0; i < expenseCount; i++)
+    {
+        printf("%d. %.2f (%s)\n",
+               i + 1,
+               expense[i],
+               category[i]);
+    }
+
+    printf("Enter transaction number to delete: ");
+    scanf("%d", &index);
+
+    index--;   // Convert to array index
+
+    if(index < 0 || index >= expenseCount)
+    {
+        printf("Invalid transaction number!\n");
+        break;
+    }
+
+    // Shift remaining transactions
+    for(int i = index; i < expenseCount - 1; i++)
+    {
+        expense[i] = expense[i + 1];
+        strcpy(category[i], category[i + 1]);
+    }
+expenseCount--;
+
+printf("Transaction deleted successfully!\n");
+
+// Add this here
+FILE *fp = fopen("transactions.txt", "w");
+
+for(int i = 0; i < incomeCount; i++)
+{
+    fprintf(fp, "Income %.2f\n", income[i]);
+}
+
+for(int i = 0; i < expenseCount; i++)
+{
+    fprintf(fp, "Expense %.2f %s\n",
+            expense[i],
+            category[i]);
+}
+
+fclose(fp);
+
+break;
+}
+case 10:
+{
+    int index;
+
+    if(expenseCount == 0)
+    {
+        printf("No expense transactions found!\n");
+        break;
+    }
+
+    printf("\n===== EXPENSE HISTORY =====\n");
+
+    for(int i = 0; i < expenseCount; i++)
+    {
+        printf("%d. %.2f (%s)\n",
+               i + 1,
+               expense[i],
+               category[i]);
+    }
+
+    break;
+}
+
+case 11:
     printf("Exiting...\n");
     return 0;
 
