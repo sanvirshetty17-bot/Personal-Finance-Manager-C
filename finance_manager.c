@@ -17,7 +17,7 @@ int choice;
 
 FILE *fp = fopen("transactions.txt", "r");
 
-    FILE *fp = fopen("transactions.txt", "r");
+    
 
 if(fp != NULL)
 {
@@ -75,6 +75,11 @@ printf("11. Exit\n");
             case 1:
 {
     FILE *fp = fopen("transactions.txt", "a");
+    if(fp == NULL)
+{
+    printf("Error opening file!\n");
+    break;
+}
 
     printf("Enter income: ");
     scanf("%f", &income[incomeCount]);
@@ -92,6 +97,11 @@ case 2:
 
     FILE *fp = fopen("transactions.txt", "a");
 
+if(fp == NULL)
+{
+    printf("Error opening file!\n");
+    break;
+}
     printf("Enter expense: ");
     scanf("%f", &expense[expenseCount]);
 
@@ -157,10 +167,13 @@ case 2:
     for (int i = 0; i < expenseCount; i++)
         totalExpense += expense[i];
 
-    printf("\nBalance: %.2f\n", totalIncome - totalExpense);
-    break;
-}
+   printf("\n===== BALANCE =====\n");
+printf("Total Income  : %.2f\n", totalIncome);
+printf("Total Expense : %.2f\n", totalExpense);
+printf("Balance       : %.2f\n", totalIncome-totalExpense);
 
+break;
+}
          case 4:
     printf("\n===== INCOME HISTORY =====\n");
     for (int i = 0; i < incomeCount; i++)
@@ -176,7 +189,11 @@ case 2:
     case 5:
 {
     FILE *fp = fopen("transactions.txt", "w");
-
+if(fp == NULL)
+{
+    printf("Error opening file!\n");
+    break;
+}
     fclose(fp);
 
     incomeCount = 0;
@@ -331,7 +348,11 @@ printf("Transaction deleted successfully!\n");
 
 // Add this here
 FILE *fp = fopen("transactions.txt", "w");
-
+if(fp == NULL)
+{
+    printf("Error opening file!\n");
+    break;
+}
 for(int i = 0; i < incomeCount; i++)
 {
     fprintf(fp, "Income %.2f\n", income[i]);
@@ -377,21 +398,93 @@ if(index < 0 || index >= expenseCount)
     printf("Invalid transaction number!\n");
     break;
 
-    break;
+    
 }
 printf("Enter new amount: ");
 scanf("%f", &expense[index]);
 
-printf("Amount updated successfully!\n");
+int catChoice;
+
+printf("\nChoose New Category:\n");
+printf("1. Food\n");
+printf("2. Travel\n");
+printf("3. Shopping\n");
+printf("4. Education\n");
+printf("5. Medicine\n");
+printf("6. Entertainment\n");
+printf("7. Other\n");
+
+printf("Enter category choice: ");
+scanf("%d", &catChoice);
+
+switch(catChoice)
+{
+    case 1:
+        strcpy(category[index], "Food");
+        break;
+
+    case 2:
+        strcpy(category[index], "Travel");
+        break;
+
+    case 3:
+        strcpy(category[index], "Shopping");
+        break;
+
+    case 4:
+        strcpy(category[index], "Education");
+        break;
+
+    case 5:
+        strcpy(category[index], "Medicine");
+        break;
+
+    case 6:
+        strcpy(category[index], "Entertainment");
+        break;
+
+    default:
+        strcpy(category[index], "Other");
+}
+
+printf("Transaction updated successfully!\n");
+
+FILE *fp = fopen("transactions.txt", "w");
+if(fp == NULL)
+{
+    printf("Error opening file!\n");
+    break;
+}
+for(int i = 0; i < incomeCount; i++)
+{
+    fprintf(fp, "Income %.2f\n", income[i]);
+}
+
+for(int i = 0; i < expenseCount; i++)
+{
+    fprintf(fp, "Expense %.2f %s\n",
+            expense[i],
+            category[i]);
+}
+
+fclose(fp);
+
+
+break;
+}
 
 case 11:
-    printf("Exiting...\n");
+    printf("\nThank you for using Personal Finance Manager!\n");
+    printf("Goodbye!\n");
     return 0;
 
-            default:
-                printf("Invalid choice!\n");
-        }
-    }
-
-    return 0;
+default:
+    printf("Invalid choice!\n");
 }
+
+}
+
+return 0;
+}
+
+
